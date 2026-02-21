@@ -1,29 +1,29 @@
-pipeline //defines the entire pipeline{
-    agent any //execution environment
+pipeline {
+    agent any
     
-    stages //container for all stages{
-        stage('Checkout') //gets code from github{
+    stages {
+        stage('Checkout') {
             steps {
                 echo 'Cloning repository...'
-                checkout scm //clones repository
+                checkout scm
             }
         }
         
-        stage('Build')//compiles java code { 
+        stage('Build') {
             steps {
                 echo 'Building application...'
-                sh 'mvn clean compile' //shell command
+                sh 'mvn clean compile'
             }
         }
         
-        stage('Test')//Ru unit tests{
+        stage('Test') {
             steps {
                 echo 'Running unit tests...'
                 sh 'mvn test'
             }
         }
         
-        stage('Package') //creates JAR file{
+        stage('Package') {
             steps {
                 echo 'Packaging application...'
                 sh 'mvn package'
@@ -31,7 +31,7 @@ pipeline //defines the entire pipeline{
         }
     }
     
- post {
+    post {
         success {
             echo 'Pipeline completed successfully!'
         }
